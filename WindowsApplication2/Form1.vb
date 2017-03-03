@@ -31,19 +31,20 @@ Public Class Form1
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Controls.Clear()
         Controls.Add(MenuStrip1)
-        Controls.Add(Panel1)
+        Controls.Add(Panel2)
 
     End Sub
 
-    Private Sub Splitter1_SplitterMoved(sender As Object, e As SplitterEventArgs)
+
+    Private Sub Label1_Click_1(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub SplitContainer1_Panel2_Paint(sender As Object, e As PaintEventArgs) Handles SplitContainer1.Panel2.Paint
+    Private Sub ListView1_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
 
     End Sub
 
-    Private Sub Label1_Click(sender As Object, e As EventArgs)
+    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
 
     End Sub
 End Class
