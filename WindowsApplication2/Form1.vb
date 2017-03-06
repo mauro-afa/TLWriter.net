@@ -1,4 +1,5 @@
-﻿Imports WindowsApplication2.Common
+﻿Imports System.IO
+Imports WindowsApplication2.Common
 Public Class Form1
     Private Sub Form1_Load(sender As Object, e As System.EventArgs) Handles Me.Load
         Dim Collection(200), part2(4) As String
@@ -44,7 +45,32 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
+    Private Sub Label2_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub Label2_Click_1(sender As Object, e As EventArgs) Handles Label2.Click
+
+    End Sub
+
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+
+
+    End Sub
+
+    Private Sub TextBox3_TextChanged(sender As Object, e As EventArgs) Handles TextBox3.TextChanged
+
+    End Sub
+
+    Private Sub TextBox3_KeyUp(sender As Object, e As KeyEventArgs) Handles TextBox3.KeyDown
+
+        If e.KeyCode = Keys.Enter Then
+
+            TextBox3.SelectionStart = TextBox3.Text.Length
+            TextBox3.Text = "1- " + TextBox3.Text
+
+        End If
+
 
     End Sub
 End Class
