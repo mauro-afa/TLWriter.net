@@ -40,6 +40,15 @@ Partial Class Form1
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.TestCasesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.TestCases = New WindowsApplication2.TestCases()
+        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.CheckedListBox1 = New System.Windows.Forms.CheckedListBox()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -58,13 +67,6 @@ Partial Class Form1
         Me.Label3 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.TestCases = New WindowsApplication2.TestCases()
-        Me.TestCasesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.MenuStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -73,8 +75,8 @@ Partial Class Form1
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TestCases, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TestCasesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TestCases, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuStrip1
@@ -82,7 +84,7 @@ Partial Class Form1
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.EditToolStripMenuItem, Me.ViewToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(1248, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1225, 24)
         Me.MenuStrip1.TabIndex = 1
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -131,7 +133,7 @@ Partial Class Form1
         Me.ListView1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ListView1.Location = New System.Drawing.Point(0, 0)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(932, 523)
+        Me.ListView1.Size = New System.Drawing.Size(915, 523)
         Me.ListView1.TabIndex = 2
         Me.ListView1.UseCompatibleStateImageBehavior = False
         Me.ListView1.View = System.Windows.Forms.View.Details
@@ -169,8 +171,8 @@ Partial Class Form1
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.ListView1)
-        Me.SplitContainer1.Size = New System.Drawing.Size(1248, 523)
-        Me.SplitContainer1.SplitterDistance = 312
+        Me.SplitContainer1.Size = New System.Drawing.Size(1225, 523)
+        Me.SplitContainer1.SplitterDistance = 306
         Me.SplitContainer1.TabIndex = 3
         '
         'TextBox1
@@ -201,6 +203,8 @@ Partial Class Form1
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.TextBox8)
+        Me.Panel2.Controls.Add(Me.Label12)
         Me.Panel2.Controls.Add(Me.DataGridView1)
         Me.Panel2.Controls.Add(Me.ComboBox4)
         Me.Panel2.Controls.Add(Me.Label11)
@@ -227,14 +231,86 @@ Partial Class Form1
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(0, 24)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1248, 523)
+        Me.Panel2.Size = New System.Drawing.Size(1225, 523)
         Me.Panel2.TabIndex = 3
+        '
+        'TextBox8
+        '
+        Me.TextBox8.Location = New System.Drawing.Point(29, 91)
+        Me.TextBox8.Name = "TextBox8"
+        Me.TextBox8.Size = New System.Drawing.Size(275, 20)
+        Me.TextBox8.TabIndex = 24
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(26, 73)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(46, 13)
+        Me.Label12.TabIndex = 23
+        Me.Label12.Text = "Jira Link"
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.AutoGenerateColumns = False
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.DataSource = Me.TestCasesBindingSource
+        Me.DataGridView1.Location = New System.Drawing.Point(29, 315)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(1155, 182)
+        Me.DataGridView1.TabIndex = 22
+        '
+        'TestCasesBindingSource
+        '
+        Me.TestCasesBindingSource.DataSource = Me.TestCases
+        Me.TestCasesBindingSource.Position = 0
+        '
+        'TestCases
+        '
+        Me.TestCases.DataSetName = "TestCases"
+        Me.TestCases.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'ComboBox4
+        '
+        Me.ComboBox4.FormattingEnabled = True
+        Me.ComboBox4.Items.AddRange(New Object() {"Manual", "Automated"})
+        Me.ComboBox4.Location = New System.Drawing.Point(917, 91)
+        Me.ComboBox4.Name = "ComboBox4"
+        Me.ComboBox4.Size = New System.Drawing.Size(127, 21)
+        Me.ComboBox4.TabIndex = 21
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(914, 72)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(54, 13)
+        Me.Label11.TabIndex = 20
+        Me.Label11.Text = "Execution"
+        '
+        'ComboBox3
+        '
+        Me.ComboBox3.FormattingEnabled = True
+        Me.ComboBox3.Items.AddRange(New Object() {"Low", "Medium", "High"})
+        Me.ComboBox3.Location = New System.Drawing.Point(692, 91)
+        Me.ComboBox3.Name = "ComboBox3"
+        Me.ComboBox3.Size = New System.Drawing.Size(127, 21)
+        Me.ComboBox3.TabIndex = 19
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(689, 73)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(60, 13)
+        Me.Label10.TabIndex = 18
+        Me.Label10.Text = "Importance"
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(917, 27)
+        Me.Button2.Location = New System.Drawing.Point(917, 28)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(131, 23)
+        Me.Button2.Size = New System.Drawing.Size(137, 23)
         Me.Button2.TabIndex = 17
         Me.Button2.Text = "Add test case"
         Me.Button2.UseVisualStyleBackColor = True
@@ -287,16 +363,16 @@ Partial Class Form1
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(255, 72)
+        Me.Label5.Location = New System.Drawing.Point(23, 12)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(99, 13)
+        Me.Label5.Size = New System.Drawing.Size(86, 13)
         Me.Label5.TabIndex = 11
-        Me.Label5.Text = "Test case JIRA link"
+        Me.Label5.Text = "Test Suite Name"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(26, 72)
+        Me.Label4.Location = New System.Drawing.Point(320, 72)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(68, 13)
         Me.Label4.TabIndex = 10
@@ -304,7 +380,7 @@ Partial Class Form1
         '
         'TextBox5
         '
-        Me.TextBox5.Location = New System.Drawing.Point(692, 149)
+        Me.TextBox5.Location = New System.Drawing.Point(689, 149)
         Me.TextBox5.Multiline = True
         Me.TextBox5.Name = "TextBox5"
         Me.TextBox5.Size = New System.Drawing.Size(191, 122)
@@ -336,31 +412,31 @@ Partial Class Form1
         '
         'TextBox7
         '
-        Me.TextBox7.Location = New System.Drawing.Point(258, 91)
+        Me.TextBox7.Location = New System.Drawing.Point(29, 31)
         Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(625, 20)
+        Me.TextBox7.Size = New System.Drawing.Size(631, 20)
         Me.TextBox7.TabIndex = 9
         '
         'TextBox6
         '
-        Me.TextBox6.Location = New System.Drawing.Point(29, 91)
+        Me.TextBox6.Location = New System.Drawing.Point(323, 92)
         Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(188, 20)
+        Me.TextBox6.Size = New System.Drawing.Size(340, 20)
         Me.TextBox6.TabIndex = 8
         '
         'ComboBox2
         '
         Me.ComboBox2.FormattingEnabled = True
         Me.ComboBox2.Items.AddRange(New Object() {"v10", "v11.01", "v11.02", "v99.99"})
-        Me.ComboBox2.Location = New System.Drawing.Point(325, 27)
+        Me.ComboBox2.Location = New System.Drawing.Point(827, 31)
         Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(121, 21)
+        Me.ComboBox2.Size = New System.Drawing.Size(53, 21)
         Me.ComboBox2.TabIndex = 3
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(255, 32)
+        Me.Label3.Location = New System.Drawing.Point(824, 12)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(42, 13)
         Me.Label3.TabIndex = 2
@@ -370,81 +446,25 @@ Partial Class Form1
         '
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Items.AddRange(New Object() {"Chevron", "Chevron Canada", "IOL", "NBS", "HPS-Dallas", "HPS-Chicago"})
-        Me.ComboBox1.Location = New System.Drawing.Point(96, 29)
+        Me.ComboBox1.Location = New System.Drawing.Point(689, 31)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(121, 21)
+        Me.ComboBox1.Size = New System.Drawing.Size(109, 21)
         Me.ComboBox1.TabIndex = 1
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(26, 32)
+        Me.Label2.Location = New System.Drawing.Point(686, 12)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(47, 13)
         Me.Label2.TabIndex = 0
         Me.Label2.Text = "Network"
         '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(469, 30)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(60, 13)
-        Me.Label10.TabIndex = 18
-        Me.Label10.Text = "Importance"
-        '
-        'ComboBox3
-        '
-        Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Items.AddRange(New Object() {"Low", "Medium", "High", "Critical"})
-        Me.ComboBox3.Location = New System.Drawing.Point(542, 29)
-        Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox3.TabIndex = 19
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(689, 32)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(54, 13)
-        Me.Label11.TabIndex = 20
-        Me.Label11.Text = "Execution"
-        '
-        'ComboBox4
-        '
-        Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Items.AddRange(New Object() {"Manual", "Automated"})
-        Me.ComboBox4.Location = New System.Drawing.Point(762, 29)
-        Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox4.TabIndex = 21
-        '
-        'DataGridView1
-        '
-        Me.DataGridView1.AutoGenerateColumns = False
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.DataSource = Me.TestCasesBindingSource
-        Me.DataGridView1.Location = New System.Drawing.Point(29, 315)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(1155, 182)
-        Me.DataGridView1.TabIndex = 22
-        '
-        'TestCases
-        '
-        Me.TestCases.DataSetName = "TestCases"
-        Me.TestCases.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'TestCasesBindingSource
-        '
-        Me.TestCasesBindingSource.DataSource = Me.TestCases
-        Me.TestCasesBindingSource.Position = 0
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1248, 547)
+        Me.ClientSize = New System.Drawing.Size(1225, 547)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.MenuStrip1)
@@ -462,8 +482,8 @@ Partial Class Form1
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TestCases, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TestCasesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TestCases, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -510,4 +530,6 @@ Partial Class Form1
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents TestCasesBindingSource As BindingSource
     Friend WithEvents TestCases As TestCases
+    Friend WithEvents TextBox8 As TextBox
+    Friend WithEvents Label12 As Label
 End Class

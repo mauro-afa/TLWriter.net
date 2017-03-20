@@ -4,9 +4,11 @@ Imports System.Data.SqlClient
 
 Public Class Form1
 
+
+    Dim newTestSuite = 0, tcounter = 0
     Dim data As New DataTable
-    Dim adapter As New SqlDataAdapter
     Dim scn As New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Mauricio\Documents\Visual Studio 2015\Projects\WindowsApplication2\WindowsApplication2\Database1.mdf;Integrated Security=True")
+    Dim adapter As New SqlDataAdapter()
     Dim scmd As New SqlCommand
     Dim sdr As SqlDataReader
     Dim Collection(200), part2(4) As String
@@ -18,6 +20,7 @@ Public Class Form1
         Button1.Text = "Create"
         Collection(0) = "DODO 4266 - CRIND SAF;Chevron Canada;09/10/1991;20/02/2017"
         Collection(1) = "DODO 4201 - Feature Regression;Chevron Canada;09/11/1991;23/02/2017"
+        DataGridView1.AutoGenerateColumns = True
 
         For Each part As String In Collection
             If (part = "") Then
@@ -72,24 +75,65 @@ Public Class Form1
 
     End Sub
 
-    Private Sub TextBox3_KeyUp(sender As Object, e As KeyEventArgs) Handles TextBox3.KeyDown
-
-    End Sub
-
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        Dim importance, execution As Integer
+
+        If ComboBox3.SelectedItem = "Low" Then
+
+            importance = 1
+
+        ElseIf ComboBox3.SelectedItem = "Medium" Then
+
+            importance = 2
+
+        ElseIf ComboBox3.SelectedItem = "High" Then
+
+            importance = 3
+
+        End If
+
+        If ComboBox4.SelectedItem = "Manual" Then
+
+            execution = 1
+
+        ElseIf ComboBox4.SelectedItem = "Automated" Then
+
+            execution = 2
+        End If
+
         scn.Open()
         scmd.Connection = scn
-        scmd.CommandText = "INSERT INTO TestSuites (Name, Network, Version, Sprint, UploadDate) VALUES('Hey','Chevron-Canada','v11.02','83','')"
-        scmd.ExecuteNonQuery()
+        tcounter = tcounter + 1
 
-        scmd.CommandText = "SELECT * FROM TestSuites"
-        sdr = scmd.ExecuteReader
-        data.Load(sdr)
-        DataGridView1.DataSource = data
+        If (newTestSuite = 0) Then
+
+            newTestSuite = 1
+            scmd.CommandText = "INSERT INTO TestSuites (Name, Network, Version, UploadDate) VALUES('" & TextBox7.Text & "','" & ComboBox1.SelectedItem & "','" & ComboBox2.SelectedItem & "','')"
+            scmd.ExecuteNonQuery()
+
+
+        End If
+
+        scmd.CommandText = "SELECT id FROM TestSuites where Name = '" & TextBox7.Text & "'"
+        Dim testSuiteID = scmd.ExecuteScalar
+        scmd.CommandText = "INSERT INTO TestCases (TCID, TSID, TestCaseID, TestObjective, Preconditions, Actions, Expec_res, Keyword, Exec_type, Importance, Stat) VALUES('" & tcounter & "', '" & testSuiteID & "','" & TextBox6.Text & "','" & TextBox2.Text & "','" & TextBox3.Text & "', '" & TextBox4.Text & "', '" & TextBox5.Text & "', 'Keyword', '" & importance & "', '" & execution & "', '1')"
+        scmd.ExecuteNonQuery()
         scn.Close()
+        adapter.SelectCommand = New SqlCommand("SELECT * FROM TestCases where TSID = '" & testSuiteID & "'", scn)
+        adapter.Fill(data)
+        DataGridView1.DataSource = data
+        TextBox2.Clear()
+        TextBox3.Clear()
+        TextBox4.Clear()
+        TextBox5.Clear()
+        TextBox6.Clear()
+        DataGridView1.Update()
+        DataGridView1.Refresh()
+
     End Sub
 End Class
