@@ -7,6 +7,7 @@ Public Class Form1
 
     Dim newTestSuite = 0, tcounter = 0
     Dim data As New DataTable
+    Dim bs As New BindingSource
     Dim scn As New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Mauricio\Documents\Visual Studio 2015\Projects\WindowsApplication2\WindowsApplication2\Database1.mdf;Integrated Security=True")
     Dim adapter As New SqlDataAdapter()
     Dim scmd As New SqlCommand
@@ -75,13 +76,12 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
-    End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
         Dim importance, execution As Integer
+        data.Clear()
 
         If ComboBox3.SelectedItem = "Low" Then
 
@@ -132,8 +132,31 @@ Public Class Form1
         TextBox4.Clear()
         TextBox5.Clear()
         TextBox6.Clear()
-        DataGridView1.Update()
-        DataGridView1.Refresh()
+
+    End Sub
+
+    Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
+
+        Dim dgvr As New DataGridViewRow
+        Dim rowIndex
+        Dim selectionString(100) As String
+
+        rowIndex = DataGridView1.CurrentCell.RowIndex
+
+        dgvr = DataGridView1.Rows(rowIndex)
+        selectionString(0) = dgvr.Cells(0).Value.ToString
+        selectionString(1) = dgvr.Cells(1).Value.ToString
+        selectionString(2) = dgvr.Cells(2).Value.ToString
+        selectionString(3) = dgvr.Cells(3).Value.ToString
+        selectionString(4) = dgvr.Cells(4).Value.ToString
+        selectionString(5) = dgvr.Cells(5).Value.ToString
+        selectionString(6) = dgvr.Cells(6).Value.ToString
+        selectionString(7) = dgvr.Cells(7).Value.ToString
+        selectionString(8) = dgvr.Cells(8).Value.ToString
+        selectionString(9) = dgvr.Cells(9).Value.ToString
+        selectionString(10) = dgvr.Cells(10).Value.ToString
+
+        TextBox2.Text = selectionString(1)
 
     End Sub
 End Class

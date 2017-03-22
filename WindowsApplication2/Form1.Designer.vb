@@ -67,6 +67,8 @@ Partial Class Form1
         Me.Label3 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -203,6 +205,8 @@ Partial Class Form1
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.Button4)
+        Me.Panel2.Controls.Add(Me.Button3)
         Me.Panel2.Controls.Add(Me.TextBox8)
         Me.Panel2.Controls.Add(Me.Label12)
         Me.Panel2.Controls.Add(Me.DataGridView1)
@@ -308,7 +312,7 @@ Partial Class Form1
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(917, 28)
+        Me.Button2.Location = New System.Drawing.Point(255, 277)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(137, 23)
         Me.Button2.TabIndex = 17
@@ -460,6 +464,24 @@ Partial Class Form1
         Me.Label2.TabIndex = 0
         Me.Label2.Text = "Network"
         '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(472, 277)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(137, 23)
+        Me.Button3.TabIndex = 25
+        Me.Button3.Text = "Update"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(689, 277)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(137, 23)
+        Me.Button4.TabIndex = 26
+        Me.Button4.Text = "Cancel"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -532,4 +554,6 @@ Partial Class Form1
     Friend WithEvents TestCases As TestCases
     Friend WithEvents TextBox8 As TextBox
     Friend WithEvents Label12 As Label
+    Friend WithEvents Button4 As Button
+    Friend WithEvents Button3 As Button
 End Class
