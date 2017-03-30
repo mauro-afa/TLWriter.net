@@ -4,7 +4,8 @@ Imports System.Data.SqlClient
 
 Public Class Form1
 
-
+    Dim translateResult() As String
+    Dim translate As New Common
     Dim newTestSuite = 0, tcounter = 0
     Dim data As New DataTable
     Dim bs As New BindingSource
@@ -48,63 +49,30 @@ Public Class Form1
         Controls.Add(MenuStrip1)
         Controls.Add(Panel2)
 
-    End Sub
-
-
-    Private Sub Label1_Click_1(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub ListView1_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
+    Private Sub CancelTC_Click(sender As Object, e As EventArgs) Handles CancelTC.Click
+
+        UpdateTC.Visible = False
+        CancelTC.Visible = False
+
+        ObjTB.Clear()
+        PreconTB.Clear()
+        ActionTB.Clear()
+        ExpResTB.Clear()
+        TCIDBox.Clear()
+        ExecCB.Text = ""
+        ImportanceCB.Text = ""
 
     End Sub
 
-    Private Sub Label2_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub Label2_Click_1(sender As Object, e As EventArgs) Handles Label2.Click
-
-    End Sub
-
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles AddTC.Click
 
 
-    End Sub
-
-    Private Sub TextBox3_TextChanged(sender As Object, e As EventArgs) Handles TextBox3.TextChanged
-
-    End Sub
-
-
-
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-
-        Dim importance, execution As Integer
         data.Clear()
 
-        If ComboBox3.SelectedItem = "Low" Then
-
-            importance = 1
-
-        ElseIf ComboBox3.SelectedItem = "Medium" Then
-
-            importance = 2
-
-        ElseIf ComboBox3.SelectedItem = "High" Then
-
-            importance = 3
-
-        End If
-
-        If ComboBox4.SelectedItem = "Manual" Then
-
-            execution = 1
-
-        ElseIf ComboBox4.SelectedItem = "Automated" Then
-
-            execution = 2
-        End If
+        translateResult = translate.translateStep(ExecCB.SelectedItem, ImportanceCB.SelectedItem)
 
         scn.Open()
         scmd.Connection = scn
@@ -113,25 +81,27 @@ Public Class Form1
         If (newTestSuite = 0) Then
 
             newTestSuite = 1
-            scmd.CommandText = "INSERT INTO TestSuites (Name, Network, Version, UploadDate) VALUES('" & TextBox7.Text & "','" & ComboBox1.SelectedItem & "','" & ComboBox2.SelectedItem & "','')"
+            scmd.CommandText = "INSERT INTO TestSuites (Name, Network, Version, UploadDate) VALUES('" & tsnTB.Text & "','" & ComboBox1.SelectedItem & "','" & ComboBox2.SelectedItem & "','')"
             scmd.ExecuteNonQuery()
 
 
         End If
 
-        scmd.CommandText = "SELECT id FROM TestSuites where Name = '" & TextBox7.Text & "'"
+        scmd.CommandText = "SELECT id FROM TestSuites where Name = '" & tsnTB.Text & "'"
         Dim testSuiteID = scmd.ExecuteScalar
-        scmd.CommandText = "INSERT INTO TestCases (TCID, TSID, TestCaseID, TestObjective, Preconditions, Actions, Expec_res, Keyword, Exec_type, Importance, Stat) VALUES('" & tcounter & "', '" & testSuiteID & "','" & TextBox6.Text & "','" & TextBox2.Text & "','" & TextBox3.Text & "', '" & TextBox4.Text & "', '" & TextBox5.Text & "', 'Keyword', '" & importance & "', '" & execution & "', '1')"
+        scmd.CommandText = "INSERT INTO TestCases (TCID, TSID, TestCaseID, TestObjective, Preconditions, Actions, Expec_res, Keyword, Exec_type, Importance, Stat) VALUES('" & tcounter & "', '" & testSuiteID & "','" & TCIDBox.Text & "','" & ObjTB.Text & "','" & PreconTB.Text & "', '" & ActionTB.Text & "', '" & ExpResTB.Text & "', 'Keyword', '" & translateResult(0) & "', '" & translateResult(1) & "', '1')"
         scmd.ExecuteNonQuery()
         scn.Close()
-        adapter.SelectCommand = New SqlCommand("SELECT * FROM TestCases where TSID = '" & testSuiteID & "'", scn)
+        adapter.SelectCommand = New SqlCommand("SELECT TestCaseID, TestObjective, Preconditions, Actions, Expec_res, Keyword, Exec_type, Importance FROM TestCases where TSID = '" & testSuiteID & "'", scn)
         adapter.Fill(data)
         DataGridView1.DataSource = data
-        TextBox2.Clear()
-        TextBox3.Clear()
-        TextBox4.Clear()
-        TextBox5.Clear()
-        TextBox6.Clear()
+        ObjTB.Clear()
+        PreconTB.Clear()
+        ActionTB.Clear()
+        ExpResTB.Clear()
+        TCIDBox.Clear()
+        ExecCB.Text = ""
+        ImportanceCB.Text = ""
 
     End Sub
 
@@ -140,6 +110,9 @@ Public Class Form1
         Dim dgvr As New DataGridViewRow
         Dim rowIndex
         Dim selectionString(100) As String
+
+        UpdateTC.Visible = True
+        CancelTC.Visible = True
 
         rowIndex = DataGridView1.CurrentCell.RowIndex
 
@@ -152,11 +125,17 @@ Public Class Form1
         selectionString(5) = dgvr.Cells(5).Value.ToString
         selectionString(6) = dgvr.Cells(6).Value.ToString
         selectionString(7) = dgvr.Cells(7).Value.ToString
-        selectionString(8) = dgvr.Cells(8).Value.ToString
-        selectionString(9) = dgvr.Cells(9).Value.ToString
-        selectionString(10) = dgvr.Cells(10).Value.ToString
 
-        TextBox2.Text = selectionString(1)
+        translateResult = translate.translateStep(selectionString(6), selectionString(7))
+
+        TCIDBox.Text = selectionString(0)
+        ObjTB.Text = selectionString(1)
+        PreconTB.Text = selectionString(2)
+        ActionTB.Text = selectionString(3)
+        ExpResTB.Text = selectionString(4)
+        ExecCB.Text = translateResult(0)
+        ImportanceCB.Text = translateResult(1)
+
 
     End Sub
 End Class

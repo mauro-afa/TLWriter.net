@@ -40,35 +40,35 @@ Partial Class Form1
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.CancelTC = New System.Windows.Forms.Button()
+        Me.UpdateTC = New System.Windows.Forms.Button()
+        Me.JiraLinkTB = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.TestCasesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.TestCases = New WindowsApplication2.TestCases()
-        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
+        Me.ExecCB = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
+        Me.ImportanceCB = New System.Windows.Forms.ComboBox()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.CheckedListBox1 = New System.Windows.Forms.CheckedListBox()
+        Me.AddTC = New System.Windows.Forms.Button()
+        Me.KeywordCL = New System.Windows.Forms.CheckedListBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.ExpResTB = New System.Windows.Forms.TextBox()
+        Me.ActionTB = New System.Windows.Forms.TextBox()
+        Me.PreconTB = New System.Windows.Forms.TextBox()
+        Me.ObjTB = New System.Windows.Forms.TextBox()
+        Me.tsnTB = New System.Windows.Forms.TextBox()
+        Me.TCIDBox = New System.Windows.Forms.TextBox()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -205,29 +205,29 @@ Partial Class Form1
         '
         'Panel2
         '
-        Me.Panel2.Controls.Add(Me.Button4)
-        Me.Panel2.Controls.Add(Me.Button3)
-        Me.Panel2.Controls.Add(Me.TextBox8)
+        Me.Panel2.Controls.Add(Me.CancelTC)
+        Me.Panel2.Controls.Add(Me.UpdateTC)
+        Me.Panel2.Controls.Add(Me.JiraLinkTB)
         Me.Panel2.Controls.Add(Me.Label12)
         Me.Panel2.Controls.Add(Me.DataGridView1)
-        Me.Panel2.Controls.Add(Me.ComboBox4)
+        Me.Panel2.Controls.Add(Me.ExecCB)
         Me.Panel2.Controls.Add(Me.Label11)
-        Me.Panel2.Controls.Add(Me.ComboBox3)
+        Me.Panel2.Controls.Add(Me.ImportanceCB)
         Me.Panel2.Controls.Add(Me.Label10)
-        Me.Panel2.Controls.Add(Me.Button2)
-        Me.Panel2.Controls.Add(Me.CheckedListBox1)
+        Me.Panel2.Controls.Add(Me.AddTC)
+        Me.Panel2.Controls.Add(Me.KeywordCL)
         Me.Panel2.Controls.Add(Me.Label9)
         Me.Panel2.Controls.Add(Me.Label8)
         Me.Panel2.Controls.Add(Me.Label7)
         Me.Panel2.Controls.Add(Me.Label6)
         Me.Panel2.Controls.Add(Me.Label5)
         Me.Panel2.Controls.Add(Me.Label4)
-        Me.Panel2.Controls.Add(Me.TextBox5)
-        Me.Panel2.Controls.Add(Me.TextBox4)
-        Me.Panel2.Controls.Add(Me.TextBox3)
-        Me.Panel2.Controls.Add(Me.TextBox2)
-        Me.Panel2.Controls.Add(Me.TextBox7)
-        Me.Panel2.Controls.Add(Me.TextBox6)
+        Me.Panel2.Controls.Add(Me.ExpResTB)
+        Me.Panel2.Controls.Add(Me.ActionTB)
+        Me.Panel2.Controls.Add(Me.PreconTB)
+        Me.Panel2.Controls.Add(Me.ObjTB)
+        Me.Panel2.Controls.Add(Me.tsnTB)
+        Me.Panel2.Controls.Add(Me.TCIDBox)
         Me.Panel2.Controls.Add(Me.ComboBox2)
         Me.Panel2.Controls.Add(Me.Label3)
         Me.Panel2.Controls.Add(Me.ComboBox1)
@@ -238,17 +238,37 @@ Partial Class Form1
         Me.Panel2.Size = New System.Drawing.Size(1225, 523)
         Me.Panel2.TabIndex = 3
         '
-        'TextBox8
+        'CancelTC
         '
-        Me.TextBox8.Location = New System.Drawing.Point(29, 91)
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(275, 20)
-        Me.TextBox8.TabIndex = 24
+        Me.CancelTC.Location = New System.Drawing.Point(689, 290)
+        Me.CancelTC.Name = "CancelTC"
+        Me.CancelTC.Size = New System.Drawing.Size(137, 23)
+        Me.CancelTC.TabIndex = 26
+        Me.CancelTC.Text = "Cancel"
+        Me.CancelTC.UseVisualStyleBackColor = True
+        Me.CancelTC.Visible = False
+        '
+        'UpdateTC
+        '
+        Me.UpdateTC.Location = New System.Drawing.Point(472, 290)
+        Me.UpdateTC.Name = "UpdateTC"
+        Me.UpdateTC.Size = New System.Drawing.Size(137, 23)
+        Me.UpdateTC.TabIndex = 25
+        Me.UpdateTC.Text = "Update"
+        Me.UpdateTC.UseVisualStyleBackColor = True
+        Me.UpdateTC.Visible = False
+        '
+        'JiraLinkTB
+        '
+        Me.JiraLinkTB.Location = New System.Drawing.Point(29, 104)
+        Me.JiraLinkTB.Name = "JiraLinkTB"
+        Me.JiraLinkTB.Size = New System.Drawing.Size(275, 20)
+        Me.JiraLinkTB.TabIndex = 24
         '
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(26, 73)
+        Me.Label12.Location = New System.Drawing.Point(26, 86)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(46, 13)
         Me.Label12.TabIndex = 23
@@ -259,7 +279,7 @@ Partial Class Form1
         Me.DataGridView1.AutoGenerateColumns = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.DataSource = Me.TestCasesBindingSource
-        Me.DataGridView1.Location = New System.Drawing.Point(29, 315)
+        Me.DataGridView1.Location = New System.Drawing.Point(29, 328)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.Size = New System.Drawing.Size(1155, 182)
         Me.DataGridView1.TabIndex = 22
@@ -274,64 +294,64 @@ Partial Class Form1
         Me.TestCases.DataSetName = "TestCases"
         Me.TestCases.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
-        'ComboBox4
+        'ExecCB
         '
-        Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Items.AddRange(New Object() {"Manual", "Automated"})
-        Me.ComboBox4.Location = New System.Drawing.Point(917, 91)
-        Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(127, 21)
-        Me.ComboBox4.TabIndex = 21
+        Me.ExecCB.FormattingEnabled = True
+        Me.ExecCB.Items.AddRange(New Object() {"Manual", "Automated"})
+        Me.ExecCB.Location = New System.Drawing.Point(689, 105)
+        Me.ExecCB.Name = "ExecCB"
+        Me.ExecCB.Size = New System.Drawing.Size(127, 21)
+        Me.ExecCB.TabIndex = 21
         '
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(914, 72)
+        Me.Label11.Location = New System.Drawing.Point(686, 86)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(54, 13)
         Me.Label11.TabIndex = 20
         Me.Label11.Text = "Execution"
         '
-        'ComboBox3
+        'ImportanceCB
         '
-        Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Items.AddRange(New Object() {"Low", "Medium", "High"})
-        Me.ComboBox3.Location = New System.Drawing.Point(692, 91)
-        Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(127, 21)
-        Me.ComboBox3.TabIndex = 19
+        Me.ImportanceCB.FormattingEnabled = True
+        Me.ImportanceCB.Items.AddRange(New Object() {"Low", "Medium", "High"})
+        Me.ImportanceCB.Location = New System.Drawing.Point(917, 105)
+        Me.ImportanceCB.Name = "ImportanceCB"
+        Me.ImportanceCB.Size = New System.Drawing.Size(127, 21)
+        Me.ImportanceCB.TabIndex = 19
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(689, 73)
+        Me.Label10.Location = New System.Drawing.Point(914, 87)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(60, 13)
         Me.Label10.TabIndex = 18
         Me.Label10.Text = "Importance"
         '
-        'Button2
+        'AddTC
         '
-        Me.Button2.Location = New System.Drawing.Point(255, 277)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(137, 23)
-        Me.Button2.TabIndex = 17
-        Me.Button2.Text = "Add test case"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.AddTC.Location = New System.Drawing.Point(255, 290)
+        Me.AddTC.Name = "AddTC"
+        Me.AddTC.Size = New System.Drawing.Size(137, 23)
+        Me.AddTC.TabIndex = 17
+        Me.AddTC.Text = "Add test case"
+        Me.AddTC.UseVisualStyleBackColor = True
         '
-        'CheckedListBox1
+        'KeywordCL
         '
-        Me.CheckedListBox1.FormattingEnabled = True
-        Me.CheckedListBox1.Items.AddRange(New Object() {"1GENAC", "2 Wire Over IP", "7-ELEVEN", "7-ELEVEN-Conoco", "7ELEVEN-EXXON", "ADD2REGRESSION", "APPLAUSE", "BP", "CHEVRON", "CHEVRON CA", "CITGO", "CONCORD", "CONTROL CENTER", "CORE", "DASHBOARD", "DEFECT", "Dual Tank Monitor", "EMV", "EXCEPTION", "EXXON", "FDC", "FUNCTIONAL", "HPSC", "HPSD", "HPSD-Generic_brand", "Incomm", "IOL", "Kris Sprint 13 Test Cases", "MARATHON", "NBS", "P66", "PADSS", "PADSS-Lite", "REGRESSION", "SANITY CHECK", "SHELL", "SITE SERVER", "SMOKE TEST", "WORLDPAY"})
-        Me.CheckedListBox1.Location = New System.Drawing.Point(917, 149)
-        Me.CheckedListBox1.Name = "CheckedListBox1"
-        Me.CheckedListBox1.Size = New System.Drawing.Size(192, 124)
-        Me.CheckedListBox1.TabIndex = 16
+        Me.KeywordCL.FormattingEnabled = True
+        Me.KeywordCL.Items.AddRange(New Object() {"1GENAC", "2 Wire Over IP", "7-ELEVEN", "7-ELEVEN-Conoco", "7ELEVEN-EXXON", "ADD2REGRESSION", "APPLAUSE", "BP", "CHEVRON", "CHEVRON CA", "CITGO", "CONCORD", "CONTROL CENTER", "CORE", "DASHBOARD", "DEFECT", "Dual Tank Monitor", "EMV", "EXCEPTION", "EXXON", "FDC", "FUNCTIONAL", "HPSC", "HPSD", "HPSD-Generic_brand", "Incomm", "IOL", "Kris Sprint 13 Test Cases", "MARATHON", "NBS", "P66", "PADSS", "PADSS-Lite", "REGRESSION", "SANITY CHECK", "SHELL", "SITE SERVER", "SMOKE TEST", "WORLDPAY"})
+        Me.KeywordCL.Location = New System.Drawing.Point(917, 162)
+        Me.KeywordCL.Name = "KeywordCL"
+        Me.KeywordCL.Size = New System.Drawing.Size(192, 124)
+        Me.KeywordCL.TabIndex = 16
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(689, 133)
+        Me.Label9.Location = New System.Drawing.Point(689, 146)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(85, 13)
         Me.Label9.TabIndex = 15
@@ -340,7 +360,7 @@ Partial Class Form1
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(469, 132)
+        Me.Label8.Location = New System.Drawing.Point(469, 145)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(42, 13)
         Me.Label8.TabIndex = 14
@@ -349,7 +369,7 @@ Partial Class Form1
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(255, 133)
+        Me.Label7.Location = New System.Drawing.Point(255, 146)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(71, 13)
         Me.Label7.TabIndex = 13
@@ -358,7 +378,7 @@ Partial Class Form1
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(29, 130)
+        Me.Label6.Location = New System.Drawing.Point(29, 143)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(52, 13)
         Me.Label6.TabIndex = 12
@@ -367,7 +387,7 @@ Partial Class Form1
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(23, 12)
+        Me.Label5.Location = New System.Drawing.Point(23, 25)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(86, 13)
         Me.Label5.TabIndex = 11
@@ -376,63 +396,63 @@ Partial Class Form1
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(320, 72)
+        Me.Label4.Location = New System.Drawing.Point(320, 85)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(68, 13)
         Me.Label4.TabIndex = 10
         Me.Label4.Text = "Test case ID"
         '
-        'TextBox5
+        'ExpResTB
         '
-        Me.TextBox5.Location = New System.Drawing.Point(689, 149)
-        Me.TextBox5.Multiline = True
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(191, 122)
-        Me.TextBox5.TabIndex = 7
+        Me.ExpResTB.Location = New System.Drawing.Point(689, 162)
+        Me.ExpResTB.Multiline = True
+        Me.ExpResTB.Name = "ExpResTB"
+        Me.ExpResTB.Size = New System.Drawing.Size(191, 122)
+        Me.ExpResTB.TabIndex = 7
         '
-        'TextBox4
+        'ActionTB
         '
-        Me.TextBox4.Location = New System.Drawing.Point(472, 149)
-        Me.TextBox4.Multiline = True
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(191, 122)
-        Me.TextBox4.TabIndex = 6
+        Me.ActionTB.Location = New System.Drawing.Point(472, 162)
+        Me.ActionTB.Multiline = True
+        Me.ActionTB.Name = "ActionTB"
+        Me.ActionTB.Size = New System.Drawing.Size(191, 122)
+        Me.ActionTB.TabIndex = 6
         '
-        'TextBox3
+        'PreconTB
         '
-        Me.TextBox3.Location = New System.Drawing.Point(255, 149)
-        Me.TextBox3.Multiline = True
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(191, 122)
-        Me.TextBox3.TabIndex = 5
+        Me.PreconTB.Location = New System.Drawing.Point(255, 162)
+        Me.PreconTB.Multiline = True
+        Me.PreconTB.Name = "PreconTB"
+        Me.PreconTB.Size = New System.Drawing.Size(191, 122)
+        Me.PreconTB.TabIndex = 5
         '
-        'TextBox2
+        'ObjTB
         '
-        Me.TextBox2.Location = New System.Drawing.Point(29, 149)
-        Me.TextBox2.Multiline = True
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(191, 122)
-        Me.TextBox2.TabIndex = 4
+        Me.ObjTB.Location = New System.Drawing.Point(29, 162)
+        Me.ObjTB.Multiline = True
+        Me.ObjTB.Name = "ObjTB"
+        Me.ObjTB.Size = New System.Drawing.Size(191, 122)
+        Me.ObjTB.TabIndex = 4
         '
-        'TextBox7
+        'tsnTB
         '
-        Me.TextBox7.Location = New System.Drawing.Point(29, 31)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(631, 20)
-        Me.TextBox7.TabIndex = 9
+        Me.tsnTB.Location = New System.Drawing.Point(29, 44)
+        Me.tsnTB.Name = "tsnTB"
+        Me.tsnTB.Size = New System.Drawing.Size(631, 20)
+        Me.tsnTB.TabIndex = 9
         '
-        'TextBox6
+        'TCIDBox
         '
-        Me.TextBox6.Location = New System.Drawing.Point(323, 92)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(340, 20)
-        Me.TextBox6.TabIndex = 8
+        Me.TCIDBox.Location = New System.Drawing.Point(323, 105)
+        Me.TCIDBox.Name = "TCIDBox"
+        Me.TCIDBox.Size = New System.Drawing.Size(340, 20)
+        Me.TCIDBox.TabIndex = 8
         '
         'ComboBox2
         '
         Me.ComboBox2.FormattingEnabled = True
         Me.ComboBox2.Items.AddRange(New Object() {"v10", "v11.01", "v11.02", "v99.99"})
-        Me.ComboBox2.Location = New System.Drawing.Point(827, 31)
+        Me.ComboBox2.Location = New System.Drawing.Point(827, 44)
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(53, 21)
         Me.ComboBox2.TabIndex = 3
@@ -440,7 +460,7 @@ Partial Class Form1
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(824, 12)
+        Me.Label3.Location = New System.Drawing.Point(824, 25)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(42, 13)
         Me.Label3.TabIndex = 2
@@ -450,7 +470,7 @@ Partial Class Form1
         '
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Items.AddRange(New Object() {"Chevron", "Chevron Canada", "IOL", "NBS", "HPS-Dallas", "HPS-Chicago"})
-        Me.ComboBox1.Location = New System.Drawing.Point(689, 31)
+        Me.ComboBox1.Location = New System.Drawing.Point(689, 44)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(109, 21)
         Me.ComboBox1.TabIndex = 1
@@ -458,29 +478,11 @@ Partial Class Form1
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(686, 12)
+        Me.Label2.Location = New System.Drawing.Point(686, 25)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(47, 13)
         Me.Label2.TabIndex = 0
         Me.Label2.Text = "Network"
-        '
-        'Button3
-        '
-        Me.Button3.Location = New System.Drawing.Point(472, 277)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(137, 23)
-        Me.Button3.TabIndex = 25
-        Me.Button3.Text = "Update"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'Button4
-        '
-        Me.Button4.Location = New System.Drawing.Point(689, 277)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(137, 23)
-        Me.Button4.TabIndex = 26
-        Me.Button4.Text = "Cancel"
-        Me.Button4.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -531,29 +533,29 @@ Partial Class Form1
     Friend WithEvents Label3 As Label
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents CheckedListBox1 As CheckedListBox
+    Friend WithEvents KeywordCL As CheckedListBox
     Friend WithEvents Label9 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
-    Friend WithEvents TextBox7 As TextBox
-    Friend WithEvents TextBox6 As TextBox
-    Friend WithEvents TextBox5 As TextBox
-    Friend WithEvents TextBox4 As TextBox
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents Button2 As Button
-    Friend WithEvents ComboBox4 As ComboBox
+    Friend WithEvents tsnTB As TextBox
+    Friend WithEvents TCIDBox As TextBox
+    Friend WithEvents ExpResTB As TextBox
+    Friend WithEvents ActionTB As TextBox
+    Friend WithEvents PreconTB As TextBox
+    Friend WithEvents ObjTB As TextBox
+    Friend WithEvents AddTC As Button
+    Friend WithEvents ExecCB As ComboBox
     Friend WithEvents Label11 As Label
-    Friend WithEvents ComboBox3 As ComboBox
+    Friend WithEvents ImportanceCB As ComboBox
     Friend WithEvents Label10 As Label
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents TestCasesBindingSource As BindingSource
     Friend WithEvents TestCases As TestCases
-    Friend WithEvents TextBox8 As TextBox
+    Friend WithEvents JiraLinkTB As TextBox
     Friend WithEvents Label12 As Label
-    Friend WithEvents Button4 As Button
-    Friend WithEvents Button3 As Button
+    Friend WithEvents CancelTC As Button
+    Friend WithEvents UpdateTC As Button
 End Class
