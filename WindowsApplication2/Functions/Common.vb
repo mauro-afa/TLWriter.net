@@ -1,4 +1,6 @@
-﻿Public Class Common
+﻿Imports System.Data.SqlClient
+
+Public Class Common
 
     Public Function translateStep(exec_type As String, importance As String)
         Dim imp, exec, result(2) As String

@@ -4,10 +4,14 @@ Imports System.Data.SqlClient
 
 Public Class Form1
 
+    Dim testSuiteID
+    Dim dgvr As New DataGridViewRow
+    Dim rowIndex
+    Dim selectionString(100) As String
     Dim translateResult() As String
     Dim translate As New Common
     Dim newTestSuite = 0, tcounter = 0
-    Dim data As New DataTable
+    Dim data, TCData As New DataTable
     Dim bs As New BindingSource
     Dim scn As New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Mauricio\Documents\Visual Studio 2015\Projects\WindowsApplication2\WindowsApplication2\Database1.mdf;Integrated Security=True")
     Dim adapter As New SqlDataAdapter()
@@ -19,24 +23,11 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As System.EventArgs) Handles Me.Load
 
-        Button1.Text = "Create"
-        Collection(0) = "DODO 4266 - CRIND SAF;Chevron Canada;09/10/1991;20/02/2017"
-        Collection(1) = "DODO 4201 - Feature Regression;Chevron Canada;09/11/1991;23/02/2017"
-        DataGridView1.AutoGenerateColumns = True
-
-        For Each part As String In Collection
-            If (part = "") Then
-                Exit For
-            End If
-
-
-            part2 = Split(part, ";")
-            LVitem = ListView1.Items.Add(part2(0))
-            LVitem.SubItems.Add(part2(1))
-            LVitem.SubItems.Add(part2(2))
-            LVitem.SubItems.Add(part2(3))
-
-        Next
+        TestCaseGrid.AutoGenerateColumns = True
+        DataGridView2.AutoGenerateColumns = True
+        adapter.SelectCommand = New SqlCommand("SELECT * FROM TestSuites", scn)
+        adapter.Fill(TCData)
+        DataGridView2.DataSource = TCData
 
     End Sub
 
@@ -44,7 +35,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles TestSuiteCreationButton.Click
         Controls.Clear()
         Controls.Add(MenuStrip1)
         Controls.Add(Panel2)
@@ -56,7 +47,67 @@ Public Class Form1
 
         UpdateTC.Visible = False
         CancelTC.Visible = False
+        DeleteButton.Visible = False
 
+        ObjTB.Clear()
+        PreconTB.Clear()
+        ActionTB.Clear()
+        ExpResTB.Clear()
+        TCIDBox.Clear()
+        ExecCB.Text = ""
+        ImportanceCB.Text = ""
+
+    End Sub
+
+    Private Sub UpdateTC_Click(sender As Object, e As EventArgs) Handles UpdateTC.Click
+        Dim answer
+
+        answer = MsgBox("Are you sure?", MsgBoxStyle.YesNo, "Check")
+        If answer = DialogResult.Yes Then
+            translateResult = translate.translateStep(ExecCB.SelectedItem, ImportanceCB.SelectedItem)
+            data.Clear()
+            scn.Open()
+            scmd.Connection = scn
+            scmd.CommandText = "UPDATE TestCases SET TestObjective = '" & ObjTB.Text & "', Preconditions = '" & PreconTB.Text & "', Actions= '" & ActionTB.Text & "', Expec_res = '" & ExpResTB.Text & "', Exec_type = '" & translateResult(0) & "', Importance = '" & translateResult(1) & "' WHERE TCID = '" & selectionString(0) & "' AND TSID = '" & testSuiteID & "'"
+            scmd.ExecuteNonQuery()
+            scn.Close()
+            adapter.SelectCommand = New SqlCommand("SELECT TCID, TestCaseID, TestObjective, Preconditions, Actions, Expec_res, Keyword, Exec_type, Importance FROM TestCases where TSID = '" & testSuiteID & "'", scn)
+            adapter.Fill(data)
+            TestCaseGrid.DataSource = data
+            ObjTB.Clear()
+            PreconTB.Clear()
+            ActionTB.Clear()
+            ExpResTB.Clear()
+            TCIDBox.Clear()
+            ExecCB.Text = ""
+            ImportanceCB.Text = ""
+
+        Else answer = MsgBoxResult.No
+        End If
+
+
+
+    End Sub
+
+    Private Sub FinishButton_Click(sender As Object, e As EventArgs) Handles FinishButton.Click
+
+        Controls.Clear()
+        Controls.Add(MenuStrip1)
+        Controls.Add(SplitContainer1)
+
+
+    End Sub
+
+    Private Sub DeleteButton_Click(sender As Object, e As EventArgs) Handles DeleteButton.Click
+
+        scn.Open()
+        scmd.Connection = scn
+        scmd.CommandText = "DELETE FROM TestCases WHERE TCID = '" & selectionString(0) & "' AND TSID = '" & testSuiteID & "'"
+        scmd.ExecuteNonQuery()
+        scn.Close()
+        adapter.SelectCommand = New SqlCommand("SELECT TCID, TestCaseID, TestObjective, Preconditions, Actions, Expec_res, Keyword, Exec_type, Importance FROM TestCases where TSID = '" & testSuiteID & "'", scn)
+        adapter.Fill(data)
+        TestCaseGrid.DataSource = data
         ObjTB.Clear()
         PreconTB.Clear()
         ActionTB.Clear()
@@ -88,13 +139,13 @@ Public Class Form1
         End If
 
         scmd.CommandText = "SELECT id FROM TestSuites where Name = '" & tsnTB.Text & "'"
-        Dim testSuiteID = scmd.ExecuteScalar
+        testSuiteID = scmd.ExecuteScalar
         scmd.CommandText = "INSERT INTO TestCases (TCID, TSID, TestCaseID, TestObjective, Preconditions, Actions, Expec_res, Keyword, Exec_type, Importance, Stat) VALUES('" & tcounter & "', '" & testSuiteID & "','" & TCIDBox.Text & "','" & ObjTB.Text & "','" & PreconTB.Text & "', '" & ActionTB.Text & "', '" & ExpResTB.Text & "', 'Keyword', '" & translateResult(0) & "', '" & translateResult(1) & "', '1')"
         scmd.ExecuteNonQuery()
         scn.Close()
-        adapter.SelectCommand = New SqlCommand("SELECT TestCaseID, TestObjective, Preconditions, Actions, Expec_res, Keyword, Exec_type, Importance FROM TestCases where TSID = '" & testSuiteID & "'", scn)
+        adapter.SelectCommand = New SqlCommand("SELECT TCID, TestCaseID, TestObjective, Preconditions, Actions, Expec_res, Keyword, Exec_type, Importance FROM TestCases where TSID = '" & testSuiteID & "'", scn)
         adapter.Fill(data)
-        DataGridView1.DataSource = data
+        TestCaseGrid.DataSource = data
         ObjTB.Clear()
         PreconTB.Clear()
         ActionTB.Clear()
@@ -105,18 +156,17 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
+    Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles TestCaseGrid.CellClick
 
-        Dim dgvr As New DataGridViewRow
-        Dim rowIndex
-        Dim selectionString(100) As String
+
 
         UpdateTC.Visible = True
         CancelTC.Visible = True
+        DeleteButton.Visible = True
 
-        rowIndex = DataGridView1.CurrentCell.RowIndex
+        rowIndex = TestCaseGrid.CurrentCell.RowIndex
 
-        dgvr = DataGridView1.Rows(rowIndex)
+        dgvr = TestCaseGrid.Rows(rowIndex)
         selectionString(0) = dgvr.Cells(0).Value.ToString
         selectionString(1) = dgvr.Cells(1).Value.ToString
         selectionString(2) = dgvr.Cells(2).Value.ToString
@@ -125,14 +175,15 @@ Public Class Form1
         selectionString(5) = dgvr.Cells(5).Value.ToString
         selectionString(6) = dgvr.Cells(6).Value.ToString
         selectionString(7) = dgvr.Cells(7).Value.ToString
+        selectionString(8) = dgvr.Cells(8).Value.ToString
 
-        translateResult = translate.translateStep(selectionString(6), selectionString(7))
+        translateResult = translate.translateStep(selectionString(7), selectionString(8))
 
-        TCIDBox.Text = selectionString(0)
-        ObjTB.Text = selectionString(1)
-        PreconTB.Text = selectionString(2)
-        ActionTB.Text = selectionString(3)
-        ExpResTB.Text = selectionString(4)
+        TCIDBox.Text = selectionString(1)
+        ObjTB.Text = selectionString(2)
+        PreconTB.Text = selectionString(3)
+        ActionTB.Text = selectionString(4)
+        ExpResTB.Text = selectionString(5)
         ExecCB.Text = translateResult(0)
         ImportanceCB.Text = translateResult(1)
 
