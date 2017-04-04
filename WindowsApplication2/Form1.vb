@@ -4,6 +4,7 @@ Imports System.Data.SqlClient
 
 Public Class Form1
 
+    Dim answer
     Dim testSuiteID
     Dim dgvr As New DataGridViewRow
     Dim rowIndex
@@ -20,6 +21,7 @@ Public Class Form1
     Dim Collection(200), part2(4) As String
     Dim LVitem As New ListViewItem
     Dim fileInfo As New Common
+    Dim checkitems As Object
 
     Private Sub Form1_Load(sender As Object, e As System.EventArgs) Handles Me.Load
 
@@ -28,10 +30,6 @@ Public Class Form1
         adapter.SelectCommand = New SqlCommand("SELECT * FROM TestSuites", scn)
         adapter.Fill(TCData)
         DataGridView2.DataSource = TCData
-
-    End Sub
-
-    Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -60,15 +58,16 @@ Public Class Form1
     End Sub
 
     Private Sub UpdateTC_Click(sender As Object, e As EventArgs) Handles UpdateTC.Click
-        Dim answer
+
 
         answer = MsgBox("Are you sure?", MsgBoxStyle.YesNo, "Check")
         If answer = DialogResult.Yes Then
+
             translateResult = translate.translateStep(ExecCB.SelectedItem, ImportanceCB.SelectedItem)
             data.Clear()
             scn.Open()
             scmd.Connection = scn
-            scmd.CommandText = "UPDATE TestCases SET TestObjective = '" & ObjTB.Text & "', Preconditions = '" & PreconTB.Text & "', Actions= '" & ActionTB.Text & "', Expec_res = '" & ExpResTB.Text & "', Exec_type = '" & translateResult(0) & "', Importance = '" & translateResult(1) & "' WHERE TCID = '" & selectionString(0) & "' AND TSID = '" & testSuiteID & "'"
+            scmd.CommandText = "UPDATE TestCases SET TestCaseID = '" & TCIDBox.Text & "', TestObjective = '" & ObjTB.Text & "', Preconditions = '" & PreconTB.Text & "', Actions= '" & ActionTB.Text & "', Expec_res = '" & ExpResTB.Text & "', Exec_type = '" & translateResult(0) & "', Importance = '" & translateResult(1) & "' WHERE TCID = '" & selectionString(0) & "' AND TSID = '" & testSuiteID & "'"
             scmd.ExecuteNonQuery()
             scn.Close()
             adapter.SelectCommand = New SqlCommand("SELECT TCID, TestCaseID, TestObjective, Preconditions, Actions, Expec_res, Keyword, Exec_type, Importance FROM TestCases where TSID = '" & testSuiteID & "'", scn)
@@ -91,30 +90,46 @@ Public Class Form1
 
     Private Sub FinishButton_Click(sender As Object, e As EventArgs) Handles FinishButton.Click
 
-        Controls.Clear()
-        Controls.Add(MenuStrip1)
-        Controls.Add(SplitContainer1)
+        answer = MsgBox("Would you like to upload the Test Suite now?", MsgBoxStyle.YesNo, "Check")
+        If answer = DialogResult.No Then
 
+            Controls.Clear()
+            Controls.Add(MenuStrip1)
+            Controls.Add(SplitContainer1)
+
+        Else answer = MsgBoxResult.Yes
+
+            'Do the upload things.
+
+        End If
 
     End Sub
 
     Private Sub DeleteButton_Click(sender As Object, e As EventArgs) Handles DeleteButton.Click
 
-        scn.Open()
-        scmd.Connection = scn
-        scmd.CommandText = "DELETE FROM TestCases WHERE TCID = '" & selectionString(0) & "' AND TSID = '" & testSuiteID & "'"
-        scmd.ExecuteNonQuery()
-        scn.Close()
-        adapter.SelectCommand = New SqlCommand("SELECT TCID, TestCaseID, TestObjective, Preconditions, Actions, Expec_res, Keyword, Exec_type, Importance FROM TestCases where TSID = '" & testSuiteID & "'", scn)
-        adapter.Fill(data)
-        TestCaseGrid.DataSource = data
-        ObjTB.Clear()
-        PreconTB.Clear()
-        ActionTB.Clear()
-        ExpResTB.Clear()
-        TCIDBox.Clear()
-        ExecCB.Text = ""
-        ImportanceCB.Text = ""
+        answer = MsgBox("Are you sure?", MsgBoxStyle.YesNo, "Check")
+        If answer = DialogResult.Yes Then
+            data.Clear()
+            scn.Open()
+            scmd.Connection = scn
+            scmd.CommandText = "DELETE FROM TestCases WHERE TCID = '" & selectionString(0) & "' AND TSID = '" & testSuiteID & "'"
+            scmd.ExecuteNonQuery()
+            scmd.CommandText = "exec FixTCIDNumber 1, '" & testSuiteID & "'"
+            scmd.ExecuteNonQuery()
+            scn.Close()
+            tcounter = tcounter - 1
+            adapter.SelectCommand = New SqlCommand("SELECT TCID, TestCaseID, TestObjective, Preconditions, Actions, Expec_res, Keyword, Exec_type, Importance FROM TestCases where TSID = '" & testSuiteID & "'", scn)
+            adapter.Fill(data)
+            TestCaseGrid.DataSource = data
+            ObjTB.Clear()
+            PreconTB.Clear()
+            ActionTB.Clear()
+            ExpResTB.Clear()
+            TCIDBox.Clear()
+            ExecCB.Text = ""
+            ImportanceCB.Text = ""
+        Else answer = MsgBoxResult.No
+        End If
 
     End Sub
 
@@ -137,6 +152,12 @@ Public Class Form1
 
 
         End If
+
+        For Each checkitems In KeywordCL.CheckedItems
+
+            MsgBox(checkitems.ToString)
+
+        Next
 
         scmd.CommandText = "SELECT id FROM TestSuites where Name = '" & tsnTB.Text & "'"
         testSuiteID = scmd.ExecuteScalar

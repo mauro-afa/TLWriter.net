@@ -31,18 +31,20 @@ Partial Class Form1
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TestSuiteCreationButton = New System.Windows.Forms.Button()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
+        Me.TestCasesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.TestCases = New WindowsApplication2.TestCases()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.FinishButton = New System.Windows.Forms.Button()
         Me.DeleteButton = New System.Windows.Forms.Button()
         Me.CancelTC = New System.Windows.Forms.Button()
         Me.UpdateTC = New System.Windows.Forms.Button()
         Me.JiraLinkTB = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.TestCaseGrid = New System.Windows.Forms.DataGridView()
-        Me.TestCasesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.TestCases = New WindowsApplication2.TestCases()
         Me.ExecCB = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.ImportanceCB = New System.Windows.Forms.ComboBox()
@@ -65,19 +67,20 @@ Partial Class Form1
         Me.Label3 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.FinishButton = New System.Windows.Forms.Button()
-        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
+        Me.UploadButton = New System.Windows.Forms.Button()
+        Me.EditTSButton = New System.Windows.Forms.Button()
+        Me.DeleteTSButton = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TestCasesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TestCases, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.TestCaseGrid, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TestCasesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TestCases, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuStrip1
@@ -121,7 +124,7 @@ Partial Class Form1
         '
         'TestSuiteCreationButton
         '
-        Me.TestSuiteCreationButton.Location = New System.Drawing.Point(12, 109)
+        Me.TestSuiteCreationButton.Location = New System.Drawing.Point(3, 9)
         Me.TestSuiteCreationButton.Name = "TestSuiteCreationButton"
         Me.TestSuiteCreationButton.Size = New System.Drawing.Size(193, 45)
         Me.TestSuiteCreationButton.TabIndex = 0
@@ -136,6 +139,9 @@ Partial Class Form1
         '
         'SplitContainer1.Panel1
         '
+        Me.SplitContainer1.Panel1.Controls.Add(Me.DeleteTSButton)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.EditTSButton)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.UploadButton)
         Me.SplitContainer1.Panel1.Controls.Add(Me.TestSuiteCreationButton)
         '
         'SplitContainer1.Panel2
@@ -144,6 +150,36 @@ Partial Class Form1
         Me.SplitContainer1.Size = New System.Drawing.Size(1225, 523)
         Me.SplitContainer1.SplitterDistance = 306
         Me.SplitContainer1.TabIndex = 3
+        '
+        'DataGridView2
+        '
+        Me.DataGridView2.AllowUserToAddRows = False
+        Me.DataGridView2.AllowUserToDeleteRows = False
+        Me.DataGridView2.AllowUserToResizeColumns = False
+        Me.DataGridView2.AllowUserToResizeRows = False
+        Me.DataGridView2.AutoGenerateColumns = False
+        Me.DataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DataGridView2.BackgroundColor = System.Drawing.SystemColors.ControlLightLight
+        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView2.DataSource = Me.TestCasesBindingSource
+        Me.DataGridView2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DataGridView2.GridColor = System.Drawing.SystemColors.ControlLightLight
+        Me.DataGridView2.Location = New System.Drawing.Point(0, 0)
+        Me.DataGridView2.Name = "DataGridView2"
+        Me.DataGridView2.RowHeadersVisible = False
+        Me.DataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DataGridView2.Size = New System.Drawing.Size(915, 523)
+        Me.DataGridView2.TabIndex = 0
+        '
+        'TestCasesBindingSource
+        '
+        Me.TestCasesBindingSource.DataSource = Me.TestCases
+        Me.TestCasesBindingSource.Position = 0
+        '
+        'TestCases
+        '
+        Me.TestCases.DataSetName = "TestCases"
+        Me.TestCases.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'TextBox1
         '
@@ -208,6 +244,15 @@ Partial Class Form1
         Me.Panel2.Size = New System.Drawing.Size(1225, 523)
         Me.Panel2.TabIndex = 3
         '
+        'FinishButton
+        '
+        Me.FinishButton.Location = New System.Drawing.Point(917, 290)
+        Me.FinishButton.Name = "FinishButton"
+        Me.FinishButton.Size = New System.Drawing.Size(137, 23)
+        Me.FinishButton.TabIndex = 28
+        Me.FinishButton.Text = "Finish"
+        Me.FinishButton.UseVisualStyleBackColor = True
+        '
         'DeleteButton
         '
         Me.DeleteButton.Location = New System.Drawing.Point(472, 290)
@@ -270,16 +315,6 @@ Partial Class Form1
         Me.TestCaseGrid.RowHeadersVisible = False
         Me.TestCaseGrid.Size = New System.Drawing.Size(1155, 182)
         Me.TestCaseGrid.TabIndex = 22
-        '
-        'TestCasesBindingSource
-        '
-        Me.TestCasesBindingSource.DataSource = Me.TestCases
-        Me.TestCasesBindingSource.Position = 0
-        '
-        'TestCases
-        '
-        Me.TestCases.DataSetName = "TestCases"
-        Me.TestCases.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'ExecCB
         '
@@ -471,34 +506,32 @@ Partial Class Form1
         Me.Label2.TabIndex = 0
         Me.Label2.Text = "Network"
         '
-        'FinishButton
+        'UploadButton
         '
-        Me.FinishButton.Location = New System.Drawing.Point(917, 290)
-        Me.FinishButton.Name = "FinishButton"
-        Me.FinishButton.Size = New System.Drawing.Size(137, 23)
-        Me.FinishButton.TabIndex = 28
-        Me.FinishButton.Text = "Finish"
-        Me.FinishButton.UseVisualStyleBackColor = True
+        Me.UploadButton.Location = New System.Drawing.Point(3, 69)
+        Me.UploadButton.Name = "UploadButton"
+        Me.UploadButton.Size = New System.Drawing.Size(190, 45)
+        Me.UploadButton.TabIndex = 1
+        Me.UploadButton.Text = "Upload Test Suite"
+        Me.UploadButton.UseVisualStyleBackColor = True
         '
-        'DataGridView2
+        'EditTSButton
         '
-        Me.DataGridView2.AllowUserToAddRows = False
-        Me.DataGridView2.AllowUserToDeleteRows = False
-        Me.DataGridView2.AllowUserToResizeColumns = False
-        Me.DataGridView2.AllowUserToResizeRows = False
-        Me.DataGridView2.AutoGenerateColumns = False
-        Me.DataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.DataGridView2.BackgroundColor = System.Drawing.SystemColors.ControlLightLight
-        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView2.DataSource = Me.TestCasesBindingSource
-        Me.DataGridView2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DataGridView2.GridColor = System.Drawing.SystemColors.ControlLightLight
-        Me.DataGridView2.Location = New System.Drawing.Point(0, 0)
-        Me.DataGridView2.Name = "DataGridView2"
-        Me.DataGridView2.RowHeadersVisible = False
-        Me.DataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridView2.Size = New System.Drawing.Size(915, 523)
-        Me.DataGridView2.TabIndex = 0
+        Me.EditTSButton.Location = New System.Drawing.Point(3, 130)
+        Me.EditTSButton.Name = "EditTSButton"
+        Me.EditTSButton.Size = New System.Drawing.Size(190, 45)
+        Me.EditTSButton.TabIndex = 2
+        Me.EditTSButton.Text = "Edit Test Suite"
+        Me.EditTSButton.UseVisualStyleBackColor = True
+        '
+        'DeleteTSButton
+        '
+        Me.DeleteTSButton.Location = New System.Drawing.Point(3, 191)
+        Me.DeleteTSButton.Name = "DeleteTSButton"
+        Me.DeleteTSButton.Size = New System.Drawing.Size(190, 45)
+        Me.DeleteTSButton.TabIndex = 3
+        Me.DeleteTSButton.Text = "Delete Test Suite"
+        Me.DeleteTSButton.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -517,14 +550,14 @@ Partial Class Form1
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TestCasesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TestCases, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         CType(Me.TestCaseGrid, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TestCasesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TestCases, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -573,4 +606,7 @@ Partial Class Form1
     Friend WithEvents DeleteButton As Button
     Friend WithEvents FinishButton As Button
     Friend WithEvents DataGridView2 As DataGridView
+    Friend WithEvents DeleteTSButton As Button
+    Friend WithEvents EditTSButton As Button
+    Friend WithEvents UploadButton As Button
 End Class
