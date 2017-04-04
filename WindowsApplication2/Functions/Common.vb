@@ -35,4 +35,9 @@ Public Class Common
 
     End Function
 
+    Public Function setCheckedKeyword(key As String)
+
+
+
+    End Function
 End Class

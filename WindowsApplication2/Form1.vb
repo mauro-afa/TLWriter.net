@@ -8,17 +8,17 @@ Public Class Form1
     Dim testSuiteID
     Dim dgvr As New DataGridViewRow
     Dim rowIndex
-    Dim selectionString(100) As String
+    Dim selectionString(100), splitKey(20) As String
     Dim translateResult() As String
     Dim translate As New Common
-    Dim newTestSuite = 0, tcounter = 0
+    Dim newTestSuite = 0, tcounter = 0, counter = 0
     Dim data, TCData As New DataTable
     Dim bs As New BindingSource
     Dim scn As New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Mauricio\Documents\Visual Studio 2015\Projects\WindowsApplication2\WindowsApplication2\Database1.mdf;Integrated Security=True")
     Dim adapter As New SqlDataAdapter()
     Dim scmd As New SqlCommand
     Dim sdr As SqlDataReader
-    Dim Collection(200), part2(4) As String
+    Dim Keywords As String
     Dim LVitem As New ListViewItem
     Dim fileInfo As New Common
     Dim checkitems As Object
@@ -54,6 +54,10 @@ Public Class Form1
         TCIDBox.Clear()
         ExecCB.Text = ""
         ImportanceCB.Text = ""
+        For Each checkitems In KeywordCL.CheckedIndices
+
+            KeywordCL.SetItemCheckState(checkitems, CheckState.Unchecked)
+        Next
 
     End Sub
 
@@ -80,6 +84,10 @@ Public Class Form1
             TCIDBox.Clear()
             ExecCB.Text = ""
             ImportanceCB.Text = ""
+            For Each checkitems In KeywordCL.CheckedIndices
+
+                KeywordCL.SetItemCheckState(checkitems, CheckState.Unchecked)
+            Next
 
         Else answer = MsgBoxResult.No
         End If
@@ -128,6 +136,10 @@ Public Class Form1
             TCIDBox.Clear()
             ExecCB.Text = ""
             ImportanceCB.Text = ""
+            For Each checkitems In KeywordCL.CheckedIndices
+
+                KeywordCL.SetItemCheckState(checkitems, CheckState.Unchecked)
+            Next
         Else answer = MsgBoxResult.No
         End If
 
@@ -155,13 +167,13 @@ Public Class Form1
 
         For Each checkitems In KeywordCL.CheckedItems
 
-            MsgBox(checkitems.ToString)
+            Keywords = Keywords + checkitems.ToString + ";"
 
         Next
 
         scmd.CommandText = "SELECT id FROM TestSuites where Name = '" & tsnTB.Text & "'"
         testSuiteID = scmd.ExecuteScalar
-        scmd.CommandText = "INSERT INTO TestCases (TCID, TSID, TestCaseID, TestObjective, Preconditions, Actions, Expec_res, Keyword, Exec_type, Importance, Stat) VALUES('" & tcounter & "', '" & testSuiteID & "','" & TCIDBox.Text & "','" & ObjTB.Text & "','" & PreconTB.Text & "', '" & ActionTB.Text & "', '" & ExpResTB.Text & "', 'Keyword', '" & translateResult(0) & "', '" & translateResult(1) & "', '1')"
+        scmd.CommandText = "INSERT INTO TestCases (TCID, TSID, TestCaseID, TestObjective, Preconditions, Actions, Expec_res, Keyword, Exec_type, Importance, Stat) VALUES('" & tcounter & "', '" & testSuiteID & "','" & TCIDBox.Text & "','" & ObjTB.Text & "','" & PreconTB.Text & "', '" & ActionTB.Text & "', '" & ExpResTB.Text & "', '" & Keywords & "', '" & translateResult(0) & "', '" & translateResult(1) & "', '1')"
         scmd.ExecuteNonQuery()
         scn.Close()
         adapter.SelectCommand = New SqlCommand("SELECT TCID, TestCaseID, TestObjective, Preconditions, Actions, Expec_res, Keyword, Exec_type, Importance FROM TestCases where TSID = '" & testSuiteID & "'", scn)
@@ -174,6 +186,10 @@ Public Class Form1
         TCIDBox.Clear()
         ExecCB.Text = ""
         ImportanceCB.Text = ""
+        For Each checkitems In KeywordCL.CheckedIndices
+
+            KeywordCL.SetItemCheckState(checkitems, CheckState.Unchecked)
+        Next
 
     End Sub
 
@@ -195,6 +211,16 @@ Public Class Form1
         selectionString(4) = dgvr.Cells(4).Value.ToString
         selectionString(5) = dgvr.Cells(5).Value.ToString
         selectionString(6) = dgvr.Cells(6).Value.ToString
+        For Each word In Split(selectionString(6), ";")
+
+            If (word <> "                                                                    ") Then
+                splitKey(counter) = word
+                MsgBox(splitKey(counter))
+                counter = counter + 1
+            End If
+
+        Next
+        counter = 0
         selectionString(7) = dgvr.Cells(7).Value.ToString
         selectionString(8) = dgvr.Cells(8).Value.ToString
 
@@ -207,6 +233,11 @@ Public Class Form1
         ExpResTB.Text = selectionString(5)
         ExecCB.Text = translateResult(0)
         ImportanceCB.Text = translateResult(1)
+        For Each key In splitKey
+
+            KeywordCL.SetItemChecked()
+
+        Next
 
 
     End Sub
