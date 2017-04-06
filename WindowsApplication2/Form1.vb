@@ -8,10 +8,11 @@ Public Class Form1
     Dim testSuiteID
     Dim dgvr As New DataGridViewRow
     Dim rowIndex
-    Dim selectionString(100), splitKey(20) As String
+    Dim selectionString(100), splitKey(20), keyIndex(20) As String
     Dim translateResult() As String
     Dim translate As New Common
-    Dim newTestSuite = 0, tcounter = 0, counter = 0
+    Dim keyIn As New Collection
+    Dim newTestSuite = 0, tcounter = 0, counter = 0, keyiterator = 0
     Dim data, TCData As New DataTable
     Dim bs As New BindingSource
     Dim scn As New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Mauricio\Documents\Visual Studio 2015\Projects\WindowsApplication2\WindowsApplication2\Database1.mdf;Integrated Security=True")
@@ -68,10 +69,15 @@ Public Class Form1
         If answer = DialogResult.Yes Then
 
             translateResult = translate.translateStep(ExecCB.SelectedItem, ImportanceCB.SelectedItem)
+            For Each checkitems In KeywordCL.CheckedItems
+
+                Keywords = Keywords + checkitems.ToString + ";"
+
+            Next
             data.Clear()
             scn.Open()
             scmd.Connection = scn
-            scmd.CommandText = "UPDATE TestCases SET TestCaseID = '" & TCIDBox.Text & "', TestObjective = '" & ObjTB.Text & "', Preconditions = '" & PreconTB.Text & "', Actions= '" & ActionTB.Text & "', Expec_res = '" & ExpResTB.Text & "', Exec_type = '" & translateResult(0) & "', Importance = '" & translateResult(1) & "' WHERE TCID = '" & selectionString(0) & "' AND TSID = '" & testSuiteID & "'"
+            scmd.CommandText = "UPDATE TestCases SET TestCaseID = '" & TCIDBox.Text & "', TestObjective = '" & ObjTB.Text & "', Preconditions = '" & PreconTB.Text & "', Actions= '" & ActionTB.Text & "', Expec_res = '" & ExpResTB.Text & "', Keyword ='" & Keywords & "' , Exec_type = '" & translateResult(0) & "', Importance = '" & translateResult(1) & "' WHERE TCID = '" & selectionString(0) & "' AND TSID = '" & testSuiteID & "'"
             scmd.ExecuteNonQuery()
             scn.Close()
             adapter.SelectCommand = New SqlCommand("SELECT TCID, TestCaseID, TestObjective, Preconditions, Actions, Expec_res, Keyword, Exec_type, Importance FROM TestCases where TSID = '" & testSuiteID & "'", scn)
@@ -87,8 +93,9 @@ Public Class Form1
             For Each checkitems In KeywordCL.CheckedIndices
 
                 KeywordCL.SetItemCheckState(checkitems, CheckState.Unchecked)
-            Next
 
+            Next
+            Keywords = ""
         Else answer = MsgBoxResult.No
         End If
 
@@ -189,13 +196,17 @@ Public Class Form1
         For Each checkitems In KeywordCL.CheckedIndices
 
             KeywordCL.SetItemCheckState(checkitems, CheckState.Unchecked)
-        Next
 
+        Next
+        Keywords = ""
     End Sub
 
     Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles TestCaseGrid.CellClick
 
+        For Each checkitems In KeywordCL.CheckedIndices
 
+            KeywordCL.SetItemCheckState(checkitems, CheckState.Unchecked)
+        Next
 
         UpdateTC.Visible = True
         CancelTC.Visible = True
@@ -214,9 +225,10 @@ Public Class Form1
         For Each word In Split(selectionString(6), ";")
 
             If (word <> "                                                                    ") Then
+
                 splitKey(counter) = word
-                MsgBox(splitKey(counter))
                 counter = counter + 1
+
             End If
 
         Next
@@ -235,10 +247,23 @@ Public Class Form1
         ImportanceCB.Text = translateResult(1)
         For Each key In splitKey
 
-            KeywordCL.SetItemChecked()
+            For Each key2 In KeywordCL.Items
+
+                If key = key2 Then
+
+                    keyIn.Add(KeywordCL.Items.IndexOf(key2))
+
+                End If
+            Next
 
         Next
+        keyiterator = 0
 
+        For Each keyI In keyIn
 
+            KeywordCL.SetItemCheckState(keyI, CheckState.Checked)
+
+        Next
+        keyIn.Clear()
     End Sub
 End Class
