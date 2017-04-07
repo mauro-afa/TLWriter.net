@@ -31,9 +31,11 @@ Partial Class Form1
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TestSuiteCreationButton = New System.Windows.Forms.Button()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.DeleteTSButton = New System.Windows.Forms.Button()
+        Me.EditTSButton = New System.Windows.Forms.Button()
+        Me.UploadButton = New System.Windows.Forms.Button()
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
         Me.TestCasesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.TestCases = New WindowsApplication2.TestCases()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -63,13 +65,11 @@ Partial Class Form1
         Me.ObjTB = New System.Windows.Forms.TextBox()
         Me.tsnTB = New System.Windows.Forms.TextBox()
         Me.TCIDBox = New System.Windows.Forms.TextBox()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.VersionCB = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.NetworkCB = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.UploadButton = New System.Windows.Forms.Button()
-        Me.EditTSButton = New System.Windows.Forms.Button()
-        Me.DeleteTSButton = New System.Windows.Forms.Button()
+        Me.ChangeTSButton = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -77,7 +77,6 @@ Partial Class Form1
         Me.SplitContainer1.SuspendLayout()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TestCasesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TestCases, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.TestCaseGrid, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -151,6 +150,33 @@ Partial Class Form1
         Me.SplitContainer1.SplitterDistance = 306
         Me.SplitContainer1.TabIndex = 3
         '
+        'DeleteTSButton
+        '
+        Me.DeleteTSButton.Location = New System.Drawing.Point(3, 191)
+        Me.DeleteTSButton.Name = "DeleteTSButton"
+        Me.DeleteTSButton.Size = New System.Drawing.Size(190, 45)
+        Me.DeleteTSButton.TabIndex = 3
+        Me.DeleteTSButton.Text = "Delete Test Suite"
+        Me.DeleteTSButton.UseVisualStyleBackColor = True
+        '
+        'EditTSButton
+        '
+        Me.EditTSButton.Location = New System.Drawing.Point(3, 130)
+        Me.EditTSButton.Name = "EditTSButton"
+        Me.EditTSButton.Size = New System.Drawing.Size(190, 45)
+        Me.EditTSButton.TabIndex = 2
+        Me.EditTSButton.Text = "Edit Test Suite"
+        Me.EditTSButton.UseVisualStyleBackColor = True
+        '
+        'UploadButton
+        '
+        Me.UploadButton.Location = New System.Drawing.Point(3, 69)
+        Me.UploadButton.Name = "UploadButton"
+        Me.UploadButton.Size = New System.Drawing.Size(190, 45)
+        Me.UploadButton.TabIndex = 1
+        Me.UploadButton.Text = "Upload Test Suite"
+        Me.UploadButton.UseVisualStyleBackColor = True
+        '
         'DataGridView2
         '
         Me.DataGridView2.AllowUserToAddRows = False
@@ -170,16 +196,6 @@ Partial Class Form1
         Me.DataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DataGridView2.Size = New System.Drawing.Size(915, 523)
         Me.DataGridView2.TabIndex = 0
-        '
-        'TestCasesBindingSource
-        '
-        Me.TestCasesBindingSource.DataSource = Me.TestCases
-        Me.TestCasesBindingSource.Position = 0
-        '
-        'TestCases
-        '
-        Me.TestCases.DataSetName = "TestCases"
-        Me.TestCases.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'TextBox1
         '
@@ -209,6 +225,7 @@ Partial Class Form1
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.ChangeTSButton)
         Me.Panel2.Controls.Add(Me.FinishButton)
         Me.Panel2.Controls.Add(Me.DeleteButton)
         Me.Panel2.Controls.Add(Me.CancelTC)
@@ -234,9 +251,9 @@ Partial Class Form1
         Me.Panel2.Controls.Add(Me.ObjTB)
         Me.Panel2.Controls.Add(Me.tsnTB)
         Me.Panel2.Controls.Add(Me.TCIDBox)
-        Me.Panel2.Controls.Add(Me.ComboBox2)
+        Me.Panel2.Controls.Add(Me.VersionCB)
         Me.Panel2.Controls.Add(Me.Label3)
-        Me.Panel2.Controls.Add(Me.ComboBox1)
+        Me.Panel2.Controls.Add(Me.NetworkCB)
         Me.Panel2.Controls.Add(Me.Label2)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(0, 24)
@@ -285,15 +302,15 @@ Partial Class Form1
         '
         'JiraLinkTB
         '
-        Me.JiraLinkTB.Location = New System.Drawing.Point(29, 104)
+        Me.JiraLinkTB.Location = New System.Drawing.Point(555, 44)
         Me.JiraLinkTB.Name = "JiraLinkTB"
-        Me.JiraLinkTB.Size = New System.Drawing.Size(275, 20)
+        Me.JiraLinkTB.Size = New System.Drawing.Size(325, 20)
         Me.JiraLinkTB.TabIndex = 24
         '
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(26, 86)
+        Me.Label12.Location = New System.Drawing.Point(552, 24)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(46, 13)
         Me.Label12.TabIndex = 23
@@ -318,9 +335,10 @@ Partial Class Form1
         '
         'ExecCB
         '
+        Me.ExecCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ExecCB.FormattingEnabled = True
         Me.ExecCB.Items.AddRange(New Object() {"Manual", "Automated"})
-        Me.ExecCB.Location = New System.Drawing.Point(689, 105)
+        Me.ExecCB.Location = New System.Drawing.Point(470, 105)
         Me.ExecCB.Name = "ExecCB"
         Me.ExecCB.Size = New System.Drawing.Size(127, 21)
         Me.ExecCB.TabIndex = 21
@@ -328,7 +346,7 @@ Partial Class Form1
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(686, 86)
+        Me.Label11.Location = New System.Drawing.Point(467, 86)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(54, 13)
         Me.Label11.TabIndex = 20
@@ -336,9 +354,10 @@ Partial Class Form1
         '
         'ImportanceCB
         '
+        Me.ImportanceCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ImportanceCB.FormattingEnabled = True
         Me.ImportanceCB.Items.AddRange(New Object() {"Low", "Medium", "High"})
-        Me.ImportanceCB.Location = New System.Drawing.Point(917, 105)
+        Me.ImportanceCB.Location = New System.Drawing.Point(689, 105)
         Me.ImportanceCB.Name = "ImportanceCB"
         Me.ImportanceCB.Size = New System.Drawing.Size(127, 21)
         Me.ImportanceCB.TabIndex = 19
@@ -346,7 +365,7 @@ Partial Class Form1
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(914, 87)
+        Me.Label10.Location = New System.Drawing.Point(686, 87)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(60, 13)
         Me.Label10.TabIndex = 18
@@ -382,7 +401,7 @@ Partial Class Form1
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(469, 145)
+        Me.Label8.Location = New System.Drawing.Point(467, 145)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(42, 13)
         Me.Label8.TabIndex = 14
@@ -391,7 +410,7 @@ Partial Class Form1
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(255, 146)
+        Me.Label7.Location = New System.Drawing.Point(250, 146)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(71, 13)
         Me.Label7.TabIndex = 13
@@ -409,7 +428,7 @@ Partial Class Form1
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(23, 25)
+        Me.Label5.Location = New System.Drawing.Point(26, 24)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(86, 13)
         Me.Label5.TabIndex = 11
@@ -418,7 +437,7 @@ Partial Class Form1
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(320, 85)
+        Me.Label4.Location = New System.Drawing.Point(26, 84)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(68, 13)
         Me.Label4.TabIndex = 10
@@ -434,7 +453,7 @@ Partial Class Form1
         '
         'ActionTB
         '
-        Me.ActionTB.Location = New System.Drawing.Point(472, 162)
+        Me.ActionTB.Location = New System.Drawing.Point(470, 162)
         Me.ActionTB.Multiline = True
         Me.ActionTB.Name = "ActionTB"
         Me.ActionTB.Size = New System.Drawing.Size(191, 122)
@@ -442,7 +461,7 @@ Partial Class Form1
         '
         'PreconTB
         '
-        Me.PreconTB.Location = New System.Drawing.Point(255, 162)
+        Me.PreconTB.Location = New System.Drawing.Point(250, 162)
         Me.PreconTB.Multiline = True
         Me.PreconTB.Name = "PreconTB"
         Me.PreconTB.Size = New System.Drawing.Size(191, 122)
@@ -458,80 +477,64 @@ Partial Class Form1
         '
         'tsnTB
         '
-        Me.tsnTB.Location = New System.Drawing.Point(29, 44)
+        Me.tsnTB.Location = New System.Drawing.Point(29, 43)
         Me.tsnTB.Name = "tsnTB"
-        Me.tsnTB.Size = New System.Drawing.Size(631, 20)
+        Me.tsnTB.Size = New System.Drawing.Size(498, 20)
         Me.tsnTB.TabIndex = 9
         '
         'TCIDBox
         '
-        Me.TCIDBox.Location = New System.Drawing.Point(323, 105)
+        Me.TCIDBox.Location = New System.Drawing.Point(29, 104)
         Me.TCIDBox.Name = "TCIDBox"
-        Me.TCIDBox.Size = New System.Drawing.Size(340, 20)
+        Me.TCIDBox.Size = New System.Drawing.Size(412, 20)
         Me.TCIDBox.TabIndex = 8
         '
-        'ComboBox2
+        'VersionCB
         '
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Items.AddRange(New Object() {"v10", "v11.01", "v11.02", "v99.99"})
-        Me.ComboBox2.Location = New System.Drawing.Point(827, 44)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(72, 21)
-        Me.ComboBox2.TabIndex = 3
+        Me.VersionCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.VersionCB.FormattingEnabled = True
+        Me.VersionCB.Items.AddRange(New Object() {"v10", "v11.01", "v11.02", "v99.99"})
+        Me.VersionCB.Location = New System.Drawing.Point(1037, 44)
+        Me.VersionCB.Name = "VersionCB"
+        Me.VersionCB.Size = New System.Drawing.Size(72, 21)
+        Me.VersionCB.TabIndex = 3
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(824, 25)
+        Me.Label3.Location = New System.Drawing.Point(1034, 25)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(42, 13)
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "Version"
         '
-        'ComboBox1
+        'NetworkCB
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Chevron", "Chevron Canada", "IOL", "NBS", "HPS-Dallas", "HPS-Chicago"})
-        Me.ComboBox1.Location = New System.Drawing.Point(689, 44)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(109, 21)
-        Me.ComboBox1.TabIndex = 1
+        Me.NetworkCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.NetworkCB.FormattingEnabled = True
+        Me.NetworkCB.Items.AddRange(New Object() {"Chevron", "Chevron Canada", "IOL", "NBS", "HPS-Dallas", "HPS-Chicago"})
+        Me.NetworkCB.Location = New System.Drawing.Point(917, 43)
+        Me.NetworkCB.Name = "NetworkCB"
+        Me.NetworkCB.Size = New System.Drawing.Size(109, 21)
+        Me.NetworkCB.TabIndex = 1
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(686, 25)
+        Me.Label2.Location = New System.Drawing.Point(914, 24)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(47, 13)
         Me.Label2.TabIndex = 0
         Me.Label2.Text = "Network"
         '
-        'UploadButton
+        'ChangeTSButton
         '
-        Me.UploadButton.Location = New System.Drawing.Point(3, 69)
-        Me.UploadButton.Name = "UploadButton"
-        Me.UploadButton.Size = New System.Drawing.Size(190, 45)
-        Me.UploadButton.TabIndex = 1
-        Me.UploadButton.Text = "Upload Test Suite"
-        Me.UploadButton.UseVisualStyleBackColor = True
-        '
-        'EditTSButton
-        '
-        Me.EditTSButton.Location = New System.Drawing.Point(3, 130)
-        Me.EditTSButton.Name = "EditTSButton"
-        Me.EditTSButton.Size = New System.Drawing.Size(190, 45)
-        Me.EditTSButton.TabIndex = 2
-        Me.EditTSButton.Text = "Edit Test Suite"
-        Me.EditTSButton.UseVisualStyleBackColor = True
-        '
-        'DeleteTSButton
-        '
-        Me.DeleteTSButton.Location = New System.Drawing.Point(3, 191)
-        Me.DeleteTSButton.Name = "DeleteTSButton"
-        Me.DeleteTSButton.Size = New System.Drawing.Size(190, 45)
-        Me.DeleteTSButton.TabIndex = 3
-        Me.DeleteTSButton.Text = "Delete Test Suite"
-        Me.DeleteTSButton.UseVisualStyleBackColor = True
+        Me.ChangeTSButton.Location = New System.Drawing.Point(917, 104)
+        Me.ChangeTSButton.Name = "ChangeTSButton"
+        Me.ChangeTSButton.Size = New System.Drawing.Size(192, 23)
+        Me.ChangeTSButton.TabIndex = 29
+        Me.ChangeTSButton.Text = "Change test suite information"
+        Me.ChangeTSButton.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -552,7 +555,6 @@ Partial Class Form1
         Me.SplitContainer1.ResumeLayout(False)
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TestCasesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TestCases, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
@@ -573,8 +575,8 @@ Partial Class Form1
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents ComboBox1 As ComboBox
-    Friend WithEvents ComboBox2 As ComboBox
+    Friend WithEvents NetworkCB As ComboBox
+    Friend WithEvents VersionCB As ComboBox
     Friend WithEvents Label3 As Label
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel2 As Panel
@@ -598,7 +600,6 @@ Partial Class Form1
     Friend WithEvents Label10 As Label
     Friend WithEvents TestCaseGrid As DataGridView
     Friend WithEvents TestCasesBindingSource As BindingSource
-    Friend WithEvents TestCases As TestCases
     Friend WithEvents JiraLinkTB As TextBox
     Friend WithEvents Label12 As Label
     Friend WithEvents CancelTC As Button
@@ -609,4 +610,5 @@ Partial Class Form1
     Friend WithEvents DeleteTSButton As Button
     Friend WithEvents EditTSButton As Button
     Friend WithEvents UploadButton As Button
+    Friend WithEvents ChangeTSButton As Button
 End Class

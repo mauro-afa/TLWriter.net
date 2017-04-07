@@ -1,5 +1,5 @@
 ﻿Imports System.IO
-Imports WindowsApplication2.Common
+Imports TLWriter.Common
 Imports System.Data.SqlClient
 
 Public Class Form1
@@ -39,6 +39,15 @@ Public Class Form1
         Controls.Add(MenuStrip1)
         Controls.Add(Panel2)
 
+
+    End Sub
+
+    Private Sub ChangeTSButton_Click(sender As Object, e As EventArgs) Handles ChangeTSButton.Click
+
+        tsnTB.Enabled = True
+        JiraLinkTB.Enabled = True
+        NetworkCB.Enabled = True
+        VersionCB.Enabled = True
 
     End Sub
 
@@ -166,7 +175,7 @@ Public Class Form1
         If (newTestSuite = 0) Then
 
             newTestSuite = 1
-            scmd.CommandText = "INSERT INTO TestSuites (Name, Network, Version, UploadDate) VALUES('" & tsnTB.Text & "','" & ComboBox1.SelectedItem & "','" & ComboBox2.SelectedItem & "','')"
+            scmd.CommandText = "INSERT INTO TestSuites (Name, Network, Version, UploadDate) VALUES('" & tsnTB.Text & "','" & NetworkCB.SelectedItem & "','" & VersionCB.SelectedItem & "','')"
             scmd.ExecuteNonQuery()
 
 
@@ -199,6 +208,10 @@ Public Class Form1
 
         Next
         Keywords = ""
+        tsnTB.Enabled = False
+        JiraLinkTB.Enabled = False
+        NetworkCB.Enabled = False
+        VersionCB.Enabled = False
     End Sub
 
     Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles TestCaseGrid.CellClick

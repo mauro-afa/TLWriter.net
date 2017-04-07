@@ -3,7 +3,7 @@
 Public Class Common
 
     Public Function translateStep(exec_type As String, importance As String)
-        Dim imp, exec, result(2) As String
+        Dim result(2) As String
 
         Select Case exec_type
             Case "Manual"
@@ -32,12 +32,6 @@ Public Class Common
         End Select
 
         Return result
-
-    End Function
-
-    Public Function setCheckedKeyword(key As String)
-
-
 
     End Function
 End Class
