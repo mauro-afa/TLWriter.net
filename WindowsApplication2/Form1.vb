@@ -35,19 +35,45 @@ Public Class Form1
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles TestSuiteCreationButton.Click
+
+        Me.SuspendLayout()
         Controls.Clear()
-        Controls.Add(MenuStrip1)
         Controls.Add(Panel2)
+        Controls.Add(MenuStrip1)
+        Me.PerformLayout()
 
 
     End Sub
 
     Private Sub ChangeTSButton_Click(sender As Object, e As EventArgs) Handles ChangeTSButton.Click
 
-        tsnTB.Enabled = True
-        JiraLinkTB.Enabled = True
-        NetworkCB.Enabled = True
-        VersionCB.Enabled = True
+
+        If (ChangeTSButton.Text = "Change test suite information") Then
+
+            tsnTB.Enabled = True
+            JiraLinkTB.Enabled = True
+            NetworkCB.Enabled = True
+            VersionCB.Enabled = True
+            ChangeTSButton.Text = "Save Changes"
+
+        Else
+
+            scn.Open()
+            scmd.Connection = scn
+            scmd.CommandText = "UPDATE TestSuites SET Name = '" & tsnTB.Text & "', Network = '" & NetworkCB.SelectedItem & "', Version = '" & VersionCB.SelectedItem & "' WHERE Id = '" & testSuiteID & "'"
+            scmd.ExecuteNonQuery()
+            scn.Close()
+
+            tsnTB.Enabled = False
+            JiraLinkTB.Enabled = False
+            NetworkCB.Enabled = False
+            VersionCB.Enabled = False
+            ChangeTSButton.Text = "Change test suite information"
+
+
+        End If
+
+
 
     End Sub
 
@@ -117,9 +143,12 @@ Public Class Form1
         answer = MsgBox("Would you like to upload the Test Suite now?", MsgBoxStyle.YesNo, "Check")
         If answer = DialogResult.No Then
 
-            Controls.Clear()
-            Controls.Add(MenuStrip1)
-            Controls.Add(SplitContainer1)
+            Me.SuspendLayout()
+            Me.Controls.Clear()
+            'Controls.Add(MenuStrip1)
+            Me.Controls.Add(SplitContainer1)
+            Me.Controls.Add(MenuStrip1)
+            Me.PerformLayout()
 
         Else answer = MsgBoxResult.Yes
 
@@ -212,6 +241,7 @@ Public Class Form1
         JiraLinkTB.Enabled = False
         NetworkCB.Enabled = False
         VersionCB.Enabled = False
+        Me.ChangeTSButton.Visible = True
     End Sub
 
     Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles TestCaseGrid.CellClick
